@@ -1,58 +1,35 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { useUpdateAd } from "@my-app/hooks";
-import { Button } from "@my-app/components";
+import { Button, FormInput, FormCheckbox } from "@my-app/components";
 import { useAdStore } from "../store/ad.store";
+import { updateInternalAdSchema } from "@my-app/schema";
 import type { UpdateInternalAdDto } from "@my-app/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const EditAdPage: React.FC = () => {
   const navigate = useNavigate();
   const { selectedAd } = useAdStore();
   const updateAdMutation = useUpdateAd();
 
+  const { control, handleSubmit, reset } = useForm<UpdateInternalAdDto>({
+    resolver: zodResolver(updateInternalAdSchema),
+  });
+
   useEffect(() => {
     if (!selectedAd) {
       navigate("/");
+    } else {
+      reset(selectedAd);
     }
-  }, [selectedAd, navigate]);
+  }, [selectedAd, navigate, reset]);
 
   if (!selectedAd) return null;
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    const updatedAd: UpdateInternalAdDto = {
-      title: formData.get("title") as string,
-      description: formData.get("description") as string,
-      price: Number(formData.get("price")),
-      address: {
-        locationDetails: {
-          city: formData.get("city") as string,
-          district: formData.get("district") as string,
-          postalCode: formData.get("postalCode") as string,
-          street: formData.get("street") as string,
-          country: formData.get("country") as string,
-        },
-        coordinates: {
-          latitude: Number(formData.get("latitude")),
-          longitude: Number(formData.get("longitude")),
-        },
-      },
-      amenities: {
-        bathrooms: Number(formData.get("bathrooms")),
-        toilets: Number(formData.get("toilets")),
-        garage: formData.get("garage") === "on",
-        balcony: formData.get("balcony") === "on",
-        rooms: Number(formData.get("rooms")),
-      },
-    };
-
+  const onSubmit = async (data: UpdateInternalAdDto) => {
     try {
-      await updateAdMutation.mutateAsync({
-        id: selectedAd.id,
-        data: updatedAd,
-      });
+      await updateAdMutation.mutateAsync({ id: selectedAd.id, data });
       navigate("/");
     } catch (error) {
       console.error("Erreur lors de la mise à jour:", error);
@@ -60,225 +37,185 @@ export const EditAdPage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold mb-8">Modifier l'annonce</h1>
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Info */}
-        <div className="bg-white rounded-lg shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold mb-4">Informations générales</h2>
-
-          <div>
-            <label className="block text-sm font-medium mb-2">Titre</label>
-            <input
-              type="text"
-              name="title"
-              required
-              defaultValue={selectedAd.title}
-              className="w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-2">
-              Description
-            </label>
-            <textarea
-              name="description"
-              required
-              rows={4}
-              defaultValue={selectedAd.description}
-              className="w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-2">Prix (€)</label>
-            <input
-              type="number"
-              name="price"
-              required
-              min="0"
-              defaultValue={selectedAd.price}
-              className="w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-        </div>
-
-        {/* Address */}
-        <div className="bg-white rounded-lg shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold mb-4">Adresse</h2>
-
-          <div>
-            <label className="block text-sm font-medium mb-2">Rue</label>
-            <input
-              type="text"
-              name="street"
-              required
-              defaultValue={selectedAd.address.locationDetails.street}
-              className="w-full px-3 py-2 border rounded-md"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Ville</label>
-              <input
-                type="text"
-                name="city"
-                required
-                defaultValue={selectedAd.address.locationDetails.city}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Quartier</label>
-              <input
-                type="text"
-                name="district"
-                required
-                defaultValue={selectedAd.address.locationDetails.district}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Code postal
-              </label>
-              <input
-                type="text"
-                name="postalCode"
-                required
-                defaultValue={selectedAd.address.locationDetails.postalCode}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Pays</label>
-              <input
-                type="text"
-                name="country"
-                required
-                defaultValue={selectedAd.address.locationDetails.country}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Latitude</label>
-              <input
-                type="number"
-                name="latitude"
-                required
-                step="any"
-                defaultValue={selectedAd.address.coordinates.latitude}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Longitude
-              </label>
-              <input
-                type="number"
-                name="longitude"
-                required
-                step="any"
-                defaultValue={selectedAd.address.coordinates.longitude}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Amenities */}
-        <div className="bg-white rounded-lg shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold mb-4">Équipements</h2>
-
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Pièces</label>
-              <input
-                type="number"
-                name="rooms"
-                required
-                min="1"
-                defaultValue={selectedAd.amenities.rooms}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Salles de bain
-              </label>
-              <input
-                type="number"
-                name="bathrooms"
-                required
-                min="0"
-                defaultValue={selectedAd.amenities.bathrooms}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                Toilettes
-              </label>
-              <input
-                type="number"
-                name="toilets"
-                required
-                min="0"
-                defaultValue={selectedAd.amenities.toilets}
-                className="w-full px-3 py-2 border rounded-md"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-6">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                name="garage"
-                defaultChecked={selectedAd.amenities.garage}
-                className="mr-2"
-              />
-              <span className="text-sm font-medium">Garage</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                name="balcony"
-                defaultChecked={selectedAd.amenities.balcony}
-                className="mr-2"
-              />
-              <span className="text-sm font-medium">Balcon</span>
-            </label>
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex gap-4">
-          <Button
-            type="submit"
-            label={
-              updateAdMutation.isPending ? "Mise à jour..." : "Enregistrer"
-            }
-            disabled={updateAdMutation.isPending}
-          />
-          <Button
-            type="button"
-            label="Annuler"
-            variant="secondary"
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
+      <div className="container mx-auto px-4 max-w-3xl">
+        <div className="mb-8">
+          <button
             onClick={() => navigate("/")}
-          />
+            className="text-gray-600 hover:text-gray-800 mb-4 flex items-center gap-2"
+          >
+            ← Retour
+          </button>
+          <h1 className="text-4xl font-bold text-gray-800">
+            Modifier l'annonce
+          </h1>
+          <p className="text-gray-600 mt-2">
+            Mettez à jour les informations ci-dessous
+          </p>
         </div>
-      </form>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Basic Info */}
+          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+              Informations générales
+            </h2>
+
+            <FormInput
+              name="title"
+              control={control}
+              label="Titre"
+              placeholder="Titre de l'annonce"
+            />
+
+            <FormInput
+              name="description"
+              control={control}
+              label="Description"
+              type="textarea"
+              rows={4}
+              placeholder="Description détaillée de votre annonce"
+            />
+
+            <FormInput
+              name="price"
+              control={control}
+              label="Prix (€)"
+              type="number"
+              min="0"
+              placeholder="0"
+            />
+          </div>
+
+          {/* Address */}
+          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+              Adresse
+            </h2>
+
+            <FormInput
+              name="address.locationDetails.street"
+              control={control}
+              label="Rue"
+              placeholder="123 Rue de la Paix"
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                name="address.locationDetails.city"
+                control={control}
+                label="Ville"
+                placeholder="Paris"
+              />
+              <FormInput
+                name="address.locationDetails.district"
+                control={control}
+                label="Quartier"
+                placeholder="Quartier"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                name="address.locationDetails.postalCode"
+                control={control}
+                label="Code postal"
+                placeholder="75000"
+              />
+              <FormInput
+                name="address.locationDetails.country"
+                control={control}
+                label="Pays"
+                placeholder="France"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                name="address.coordinates.latitude"
+                control={control}
+                label="Latitude"
+                type="number"
+                step="any"
+                placeholder="48.8566"
+              />
+              <FormInput
+                name="address.coordinates.longitude"
+                control={control}
+                label="Longitude"
+                type="number"
+                step="any"
+                placeholder="2.3522"
+              />
+            </div>
+          </div>
+
+          {/* Amenities */}
+          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+              Équipements
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <FormInput
+                name="amenities.rooms"
+                control={control}
+                label="Pièces"
+                type="number"
+                min="1"
+                placeholder="3"
+              />
+              <FormInput
+                name="amenities.bathrooms"
+                control={control}
+                label="Salles de bain"
+                type="number"
+                min="0"
+                placeholder="1"
+              />
+              <FormInput
+                name="amenities.toilets"
+                control={control}
+                label="Toilettes"
+                type="number"
+                min="0"
+                placeholder="2"
+              />
+            </div>
+
+            <div className="flex gap-8 pt-2">
+              <FormCheckbox
+                name="amenities.garage"
+                control={control}
+                label="Garage"
+              />
+              <FormCheckbox
+                name="amenities.balcony"
+                control={control}
+                label="Balcon"
+              />
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-4 justify-end">
+            <Button
+              type="button"
+              label="Annuler"
+              variant="secondary"
+              onClick={() => navigate("/")}
+            />
+            <Button
+              type="submit"
+              label={
+                updateAdMutation.isPending ? "Mise à jour..." : "Enregistrer"
+              }
+              disabled={updateAdMutation.isPending}
+              className="min-w-[150px]"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
