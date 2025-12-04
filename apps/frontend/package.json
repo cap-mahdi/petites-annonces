@@ -1,0 +1,8 @@
+{
+  "name": "@my-app/frontend",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17"
+  }
+}
