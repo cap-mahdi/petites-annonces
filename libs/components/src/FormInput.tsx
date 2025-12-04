@@ -1,4 +1,3 @@
-import React from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 interface FormInputProps<T extends FieldValues> {
@@ -32,7 +31,7 @@ export function FormInput<T extends FieldValues>({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <div className={className}>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
             {label}
           </label>
           {isTextarea ? (
@@ -40,8 +39,10 @@ export function FormInput<T extends FieldValues>({
               {...field}
               rows={rows}
               placeholder={placeholder}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                error ? "border-red-500" : "border-gray-300"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md cursor-text resize-none ${
+                error
+                  ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300"
               }`}
             />
           ) : (
@@ -51,13 +52,17 @@ export function FormInput<T extends FieldValues>({
               placeholder={placeholder}
               step={step}
               min={min}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${
-                error ? "border-red-500" : "border-gray-300"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md cursor-text ${
+                error
+                  ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+                  : "border-gray-300"
               }`}
             />
           )}
           {error && (
-            <p className="mt-1 text-sm text-red-600">{error.message}</p>
+            <p className="mt-2 text-sm text-red-600 font-medium">
+              {error.message}
+            </p>
           )}
         </div>
       )}

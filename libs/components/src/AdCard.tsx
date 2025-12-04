@@ -58,11 +58,11 @@ export const AdCard: React.FC<AdCardProps> = ({ ad, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-3 mt-6">
         {onEdit && (
           <button
             onClick={() => onEdit(ad.id)}
-            className="flex-1 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 cursor-pointer transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 font-semibold"
           >
             Modifier
           </button>
@@ -70,7 +70,7 @@ export const AdCard: React.FC<AdCardProps> = ({ ad, onEdit, onDelete }) => {
         {onDelete && (
           <button
             onClick={() => onDelete(ad.id)}
-            className="flex-1 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+            className="flex-1 px-4 py-2.5 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 cursor-pointer transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 font-semibold"
           >
             Supprimer
           </button>

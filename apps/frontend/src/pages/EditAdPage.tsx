@@ -42,7 +42,7 @@ export const EditAdPage: React.FC = () => {
         <div className="mb-8">
           <button
             onClick={() => navigate("/")}
-            className="text-gray-600 hover:text-gray-800 mb-4 flex items-center gap-2"
+            className="text-gray-600 hover:text-gray-900 mb-4 flex items-center gap-2 cursor-pointer transition-colors duration-200 font-semibold"
           >
             ← Retour
           </button>

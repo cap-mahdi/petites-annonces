@@ -10,8 +10,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 export const CreateAdPage: React.FC = () => {
   const navigate = useNavigate();
   const createAdMutation = useCreateAd();
-  
-  const { control, handleSubmit, formState: { errors } } = useForm<CreateInternalAdDto>({
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateInternalAdDto>({
     resolver: zodResolver(createInternalAdSchema),
     defaultValues: {
       amenities: {
@@ -36,173 +40,179 @@ export const CreateAdPage: React.FC = () => {
         <div className="mb-8">
           <button
             onClick={() => navigate("/")}
-            className="text-gray-600 hover:text-gray-800 mb-4 flex items-center gap-2"
+            className="text-gray-600 hover:text-gray-900 mb-4 flex items-center gap-2 cursor-pointer transition-colors duration-200 font-semibold"
           >
             ← Retour
           </button>
-          <h1 className="text-4xl font-bold text-gray-800">Créer une annonce</h1>
-          <p className="text-gray-600 mt-2">Remplissez le formulaire ci-dessous</p>
+          <h1 className="text-4xl font-bold text-gray-800">
+            Créer une annonce
+          </h1>
+          <p className="text-gray-600 mt-2">
+            Remplissez le formulaire ci-dessous
+          </p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Basic Info */}
-        <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
-            Informations générales
-          </h2>
+          {/* Basic Info */}
+          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+              Informations générales
+            </h2>
 
-          <FormInput
-            name="title"
-            control={control}
-            label="Titre"
-            placeholder="Titre de l'annonce"
-          />
-
-          <FormInput
-            name="description"
-            control={control}
-            label="Description"
-            type="textarea"
-            rows={4}
-            placeholder="Description détaillée de votre annonce"
-          />
-
-          <FormInput
-            name="price"
-            control={control}
-            label="Prix (€)"
-            type="number"
-            min="0"
-            placeholder="0"
-          />
-        </div>
-
-        {/* Address */}
-        <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
-            Adresse
-          </h2>
-
-          <FormInput
-            name="address.locationDetails.street"
-            control={control}
-            label="Rue"
-            placeholder="123 Rue de la Paix"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormInput
-              name="address.locationDetails.city"
+              name="title"
               control={control}
-              label="Ville"
-              placeholder="Paris"
+              label="Titre"
+              placeholder="Titre de l'annonce"
             />
-            <FormInput
-              name="address.locationDetails.district"
-              control={control}
-              label="Quartier"
-              placeholder="Quartier"
-            />
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormInput
-              name="address.locationDetails.postalCode"
+              name="description"
               control={control}
-              label="Code postal"
-              placeholder="75000"
+              label="Description"
+              type="textarea"
+              rows={4}
+              placeholder="Description détaillée de votre annonce"
             />
-            <FormInput
-              name="address.locationDetails.country"
-              control={control}
-              label="Pays"
-              placeholder="France"
-            />
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormInput
-              name="address.coordinates.latitude"
+              name="price"
               control={control}
-              label="Latitude"
-              type="number"
-              step="any"
-              placeholder="48.8566"
-            />
-            <FormInput
-              name="address.coordinates.longitude"
-              control={control}
-              label="Longitude"
-              type="number"
-              step="any"
-              placeholder="2.3522"
-            />
-          </div>
-        </div>
-
-        {/* Amenities */}
-        <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
-          <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
-            Équipements
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <FormInput
-              name="amenities.rooms"
-              control={control}
-              label="Pièces"
-              type="number"
-              min="1"
-              placeholder="3"
-            />
-            <FormInput
-              name="amenities.bathrooms"
-              control={control}
-              label="Salles de bain"
+              label="Prix (€)"
               type="number"
               min="0"
-              placeholder="1"
+              placeholder="0"
             />
+          </div>
+
+          {/* Address */}
+          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+              Adresse
+            </h2>
+
             <FormInput
-              name="amenities.toilets"
+              name="address.locationDetails.street"
               control={control}
-              label="Toilettes"
-              type="number"
-              min="0"
-              placeholder="2"
+              label="Rue"
+              placeholder="123 Rue de la Paix"
             />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                name="address.locationDetails.city"
+                control={control}
+                label="Ville"
+                placeholder="Paris"
+              />
+              <FormInput
+                name="address.locationDetails.district"
+                control={control}
+                label="Quartier"
+                placeholder="Quartier"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                name="address.locationDetails.postalCode"
+                control={control}
+                label="Code postal"
+                placeholder="75000"
+              />
+              <FormInput
+                name="address.locationDetails.country"
+                control={control}
+                label="Pays"
+                placeholder="France"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                name="address.coordinates.latitude"
+                control={control}
+                label="Latitude"
+                type="number"
+                step="any"
+                placeholder="48.8566"
+              />
+              <FormInput
+                name="address.coordinates.longitude"
+                control={control}
+                label="Longitude"
+                type="number"
+                step="any"
+                placeholder="2.3522"
+              />
+            </div>
           </div>
 
-          <div className="flex gap-8 pt-2">
-            <FormCheckbox
-              name="amenities.garage"
-              control={control}
-              label="Garage"
+          {/* Amenities */}
+          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+              Équipements
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <FormInput
+                name="amenities.rooms"
+                control={control}
+                label="Pièces"
+                type="number"
+                min="1"
+                placeholder="3"
+              />
+              <FormInput
+                name="amenities.bathrooms"
+                control={control}
+                label="Salles de bain"
+                type="number"
+                min="0"
+                placeholder="1"
+              />
+              <FormInput
+                name="amenities.toilets"
+                control={control}
+                label="Toilettes"
+                type="number"
+                min="0"
+                placeholder="2"
+              />
+            </div>
+
+            <div className="flex gap-8 pt-2">
+              <FormCheckbox
+                name="amenities.garage"
+                control={control}
+                label="Garage"
+              />
+              <FormCheckbox
+                name="amenities.balcony"
+                control={control}
+                label="Balcon"
+              />
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-4 justify-end">
+            <Button
+              type="button"
+              label="Annuler"
+              variant="secondary"
+              onClick={() => navigate("/")}
             />
-            <FormCheckbox
-              name="amenities.balcony"
-              control={control}
-              label="Balcon"
+            <Button
+              type="submit"
+              label={
+                createAdMutation.isPending ? "Création..." : "Créer l'annonce"
+              }
+              disabled={createAdMutation.isPending}
+              className="min-w-[150px]"
             />
           </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex gap-4 justify-end">
-          <Button
-            type="button"
-            label="Annuler"
-            variant="secondary"
-            onClick={() => navigate("/")}
-          />
-          <Button
-            type="submit"
-            label={createAdMutation.isPending ? "Création..." : "Créer l'annonce"}
-            disabled={createAdMutation.isPending}
-            className="min-w-[150px]"
-          />
-        </div>
-      </form>
+        </form>
       </div>
     </div>
   );

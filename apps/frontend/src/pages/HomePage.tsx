@@ -8,7 +8,7 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { data: ads, isLoading, error } = useGetAds();
   const deleteAdMutation = useDeleteAd();
-  const { setSelectedAd, openForm } = useAdStore();
+  const { setSelectedAd } = useAdStore();
 
   const handleCreateNew = () => {
     setSelectedAd(null);
