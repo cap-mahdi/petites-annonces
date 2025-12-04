@@ -16,6 +16,13 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@my-app/source"]
+    "customConditions": ["@my-app/source"],
+    "baseUrl": ".",
+    "paths": {
+      "@my-app/types": ["libs/types/src/index.ts"],
+      "@my-app/schema": ["libs/schema/src/index.ts"],
+      "@my-app/components": ["libs/components/src/index.tsx"],
+      "@my-app/hooks": ["libs/hooks/src/index.ts"]
+    }
   }
 }

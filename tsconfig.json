@@ -11,6 +11,18 @@
     },
     {
       "path": "./apps/frontend"
+    },
+    {
+      "path": "./libs/components"
+    },
+    {
+      "path": "./libs/schema"
+    },
+    {
+      "path": "./libs/hooks"
+    },
+    {
+      "path": "./libs/types"
     }
   ]
 }
