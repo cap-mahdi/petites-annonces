@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useUpdateAd } from '@my-app/hooks';
-import { Button } from '@my-app/components';
-import { useAdStore } from '../store/ad.store';
-import type { UpdateInternalAdDto } from '@my-app/types';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUpdateAd } from "@my-app/hooks";
+import { Button } from "@my-app/components";
+import { useAdStore } from "../store/ad.store";
+import type { UpdateInternalAdDto } from "@my-app/types";
 
 export const EditAdPage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export const EditAdPage: React.FC = () => {
 
   useEffect(() => {
     if (!selectedAd) {
-      navigate('/');
+      navigate("/");
     }
   }, [selectedAd, navigate]);
 
@@ -23,36 +23,39 @@ export const EditAdPage: React.FC = () => {
     const formData = new FormData(e.currentTarget);
 
     const updatedAd: UpdateInternalAdDto = {
-      title: formData.get('title') as string,
-      description: formData.get('description') as string,
-      price: Number(formData.get('price')),
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      price: Number(formData.get("price")),
       address: {
         locationDetails: {
-          city: formData.get('city') as string,
-          district: formData.get('district') as string,
-          postalCode: formData.get('postalCode') as string,
-          street: formData.get('street') as string,
-          country: formData.get('country') as string,
+          city: formData.get("city") as string,
+          district: formData.get("district") as string,
+          postalCode: formData.get("postalCode") as string,
+          street: formData.get("street") as string,
+          country: formData.get("country") as string,
         },
         coordinates: {
-          latitude: Number(formData.get('latitude')),
-          longitude: Number(formData.get('longitude')),
+          latitude: Number(formData.get("latitude")),
+          longitude: Number(formData.get("longitude")),
         },
       },
       amenities: {
-        bathrooms: Number(formData.get('bathrooms')),
-        toilets: Number(formData.get('toilets')),
-        garage: formData.get('garage') === 'on',
-        balcony: formData.get('balcony') === 'on',
-        rooms: Number(formData.get('rooms')),
+        bathrooms: Number(formData.get("bathrooms")),
+        toilets: Number(formData.get("toilets")),
+        garage: formData.get("garage") === "on",
+        balcony: formData.get("balcony") === "on",
+        rooms: Number(formData.get("rooms")),
       },
     };
 
     try {
-      await updateAdMutation.mutateAsync({ id: selectedAd.id, data: updatedAd });
-      navigate('/');
+      await updateAdMutation.mutateAsync({
+        id: selectedAd.id,
+        data: updatedAd,
+      });
+      navigate("/");
     } catch (error) {
-      console.error('Erreur lors de la mise à jour:', error);
+      console.error("Erreur lors de la mise à jour:", error);
     }
   };
 
@@ -64,7 +67,7 @@ export const EditAdPage: React.FC = () => {
         {/* Basic Info */}
         <div className="bg-white rounded-lg shadow p-6 space-y-4">
           <h2 className="text-xl font-semibold mb-4">Informations générales</h2>
-          
+
           <div>
             <label className="block text-sm font-medium mb-2">Titre</label>
             <input
@@ -77,7 +80,9 @@ export const EditAdPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Description</label>
+            <label className="block text-sm font-medium mb-2">
+              Description
+            </label>
             <textarea
               name="description"
               required
@@ -103,7 +108,7 @@ export const EditAdPage: React.FC = () => {
         {/* Address */}
         <div className="bg-white rounded-lg shadow p-6 space-y-4">
           <h2 className="text-xl font-semibold mb-4">Adresse</h2>
-          
+
           <div>
             <label className="block text-sm font-medium mb-2">Rue</label>
             <input
@@ -140,7 +145,9 @@ export const EditAdPage: React.FC = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Code postal</label>
+              <label className="block text-sm font-medium mb-2">
+                Code postal
+              </label>
               <input
                 type="text"
                 name="postalCode"
@@ -174,7 +181,9 @@ export const EditAdPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Longitude</label>
+              <label className="block text-sm font-medium mb-2">
+                Longitude
+              </label>
               <input
                 type="number"
                 name="longitude"
@@ -190,7 +199,7 @@ export const EditAdPage: React.FC = () => {
         {/* Amenities */}
         <div className="bg-white rounded-lg shadow p-6 space-y-4">
           <h2 className="text-xl font-semibold mb-4">Équipements</h2>
-          
+
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium mb-2">Pièces</label>
@@ -204,7 +213,9 @@ export const EditAdPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Salles de bain</label>
+              <label className="block text-sm font-medium mb-2">
+                Salles de bain
+              </label>
               <input
                 type="number"
                 name="bathrooms"
@@ -215,7 +226,9 @@ export const EditAdPage: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Toilettes</label>
+              <label className="block text-sm font-medium mb-2">
+                Toilettes
+              </label>
               <input
                 type="number"
                 name="toilets"
@@ -253,14 +266,16 @@ export const EditAdPage: React.FC = () => {
         <div className="flex gap-4">
           <Button
             type="submit"
-            label={updateAdMutation.isPending ? 'Mise à jour...' : 'Enregistrer'}
+            label={
+              updateAdMutation.isPending ? "Mise à jour..." : "Enregistrer"
+            }
             disabled={updateAdMutation.isPending}
           />
           <Button
             type="button"
             label="Annuler"
             variant="secondary"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
           />
         </div>
       </form>

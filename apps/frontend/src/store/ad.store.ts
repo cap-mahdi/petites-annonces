@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import type { InternalAd } from '@my-app/types';
+import { create } from "zustand";
+import type { InternalAd } from "@my-app/types";
 
 interface AdStore {
   selectedAd: InternalAd | null;

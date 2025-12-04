@@ -1,8 +1,8 @@
-import React from 'react';
-import { useGetAds, useDeleteAd } from '@my-app/hooks';
-import { AdCard, Button } from '@my-app/components';
-import { useAdStore } from '../store/ad.store';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useGetAds, useDeleteAd } from "@my-app/hooks";
+import { AdCard, Button } from "@my-app/components";
+import { useAdStore } from "../store/ad.store";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,23 +12,23 @@ export const HomePage: React.FC = () => {
 
   const handleCreateNew = () => {
     setSelectedAd(null);
-    navigate('/create');
+    navigate("/create");
   };
 
   const handleEdit = (id: string) => {
     const ad = ads?.find((a) => a.id === id);
     if (ad) {
       setSelectedAd(ad);
-      navigate('/edit');
+      navigate("/edit");
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?')) {
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?")) {
       try {
         await deleteAdMutation.mutateAsync(id);
       } catch (error) {
-        console.error('Erreur lors de la suppression:', error);
+        console.error("Erreur lors de la suppression:", error);
       }
     }
   };

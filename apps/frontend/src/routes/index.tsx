@@ -1,19 +1,19 @@
-import { RouteObject } from 'react-router-dom';
-import { HomePage } from '../pages/HomePage';
-import { CreateAdPage } from '../pages/CreateAdPage';
-import { EditAdPage } from '../pages/EditAdPage';
+import { RouteObject } from "react-router-dom";
+import { HomePage } from "../pages/HomePage";
+import { CreateAdPage } from "../pages/CreateAdPage";
+import { EditAdPage } from "../pages/EditAdPage";
 
 export const routes: RouteObject[] = [
   {
-    path: '/',
+    path: "/",
     element: <HomePage />,
   },
   {
-    path: '/create',
+    path: "/create",
     element: <CreateAdPage />,
   },
   {
-    path: '/edit',
+    path: "/edit",
     element: <EditAdPage />,
   },
 ];
