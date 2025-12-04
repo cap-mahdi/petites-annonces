@@ -3,31 +3,10 @@
 import NxWelcome from "./nx-welcome";
 
 import { Route, Routes, Link } from "react-router-dom";
-import { Button } from "@my-app/components";
-import { useCounter } from "@my-app/hooks";
-import type { User } from "@my-app/types";
 
 export function App() {
-  const { count, increment } = useCounter(0);
-
-  // Example of using the User type
-  const user: User = {
-    id: "1",
-    name: "Test User",
-    email: "test@example.com",
-  };
-
   return (
     <div>
-      <div className="p-4 bg-gray-100 mb-4">
-        <h2 className="text-xl font-bold mb-2">Testing Shared Libraries</h2>
-        <p>Counter: {count}</p>
-        <Button label="Increment" onClick={increment} />
-        <p className="mt-2">
-          User: {user.name} ({user.email})
-        </p>
-      </div>
-
       <NxWelcome title="@my-app/frontend" />
 
       {/* START: routes */}

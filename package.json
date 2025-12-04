@@ -53,6 +53,7 @@
     "apps/*"
   ],
   "dependencies": {
+    "@tanstack/react-query": "^5.90.12",
     "axios": "^1.6.0",
     "express": "^4.21.2",
     "react": "^19.0.0",
