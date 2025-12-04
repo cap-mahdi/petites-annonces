@@ -1,11 +1,5 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
-export type ApiResponse<T> = {
-  success: boolean;
-  data: T;
-  message?: string;
-};
+// Re-export all types from individual files
+export * from "./address";
+export * from "./amenities";
+export * from "./internal-ad";
+export * from "./api";
