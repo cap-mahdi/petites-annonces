@@ -96,18 +96,13 @@ myApp/
 - [ ] **Authentification** : JWT + session utilisateur
 - [ ] **Pagination** : Limite de 20 annonces par page côté API
 
-### Moyen terme
+### Long terme
 - [ ] **Persistance réelle** : Migrer vers PostgreSQL/MongoDB pour stockage permanent
 - [ ] **Recherche avancée** : Filtres par catégorie, prix, localisation
 - [ ] **Geocoding** : Convertir adresses → coordonnées (API Nominatim)
 - [ ] **Notifications** : WebSockets pour alertes en temps réel
 - [ ] **CI/CD** : GitHub Actions pour déploiement automatique
 
-### Long terme
-- [ ] **Microservices** : Séparer auth, annonces, paiements en services indépendants
-- [ ] **GraphQL** : Remplacer REST par Apollo pour requêtes flexibles
-- [ ] **Internationalisation** : Support multi-langues (i18next)
-- [ ] **Progressive Web App** : Mode hors ligne + installation mobile
 
 ---
 
