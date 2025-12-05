@@ -1,4 +1,3 @@
-import React from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 interface FormCheckboxProps<T extends FieldValues> {
@@ -21,8 +20,8 @@ export function FormCheckbox<T extends FieldValues>({
           <input
             {...field}
             type="checkbox"
-            checked={value}
-            onChange={(e) => onChange(e.target.checked)}
+            checked={!!value}
+            onChange={(e) => onChange((e.target as HTMLInputElement).checked)}
             className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all"
           />
           <span className="text-sm font-semibold text-gray-700 select-none">

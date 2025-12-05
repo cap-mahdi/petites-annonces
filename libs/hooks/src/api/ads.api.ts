@@ -13,7 +13,7 @@ export const adsApi = {
     const response = await fetch(`${API_URL}/ads`);
     if (!response.ok)
       throw new Error("Erreur lors de la récupération des annonces");
-    const data: ApiResponse<InternalAd[]> = await response.json();
+    const data = (await response.json()) as ApiResponse<InternalAd[]>;
     return data.data;
   },
 
@@ -22,7 +22,7 @@ export const adsApi = {
     const response = await fetch(`${API_URL}/ads/${id}`);
     if (!response.ok)
       throw new Error("Erreur lors de la récupération de l'annonce");
-    const data: ApiResponse<InternalAd> = await response.json();
+    const data = (await response.json()) as ApiResponse<InternalAd>;
     return data.data;
   },
 
@@ -34,12 +34,12 @@ export const adsApi = {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-      const error = await response.json();
+      const error = (await response.json()) as { message?: string };
       throw new Error(
         error.message || "Erreur lors de la création de l'annonce"
       );
     }
-    const result: ApiResponse<InternalAd> = await response.json();
+    const result = (await response.json()) as ApiResponse<InternalAd>;
     return result.data;
   },
 
@@ -54,12 +54,12 @@ export const adsApi = {
       body: JSON.stringify(data),
     });
     if (!response.ok) {
-      const error = await response.json();
+      const error = (await response.json()) as { message?: string };
       throw new Error(
         error.message || "Erreur lors de la mise à jour de l'annonce"
       );
     }
-    const result: ApiResponse<InternalAd> = await response.json();
+    const result = (await response.json()) as ApiResponse<InternalAd>;
     return result.data;
   },
 
@@ -69,7 +69,7 @@ export const adsApi = {
       method: "DELETE",
     });
     if (!response.ok) {
-      const error = await response.json();
+      const error = (await response.json()) as { message?: string };
       throw new Error(
         error.message || "Erreur lors de la suppression de l'annonce"
       );
