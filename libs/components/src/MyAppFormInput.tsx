@@ -71,7 +71,7 @@ export function MyAppFormInput<T extends FieldValues>({
                 placeholder={placeholder}
                 step={step}
                 min={min}
-                className={` w-full px-5 py-5 border-2 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-300 cursor-text bg-red-600 hover:bg-white text-gray-50 placeholder-gray-400  ${
+                className={` w-full px-5 py-2 border-2 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-300 cursor-text bg-gray-50 hover:bg-white text-gray-900 placeholder-gray-400  ${
                   error
                     ? "border-red-400 focus:ring-red-100 focus:border-red-500 bg-red-50"
                     : "border-gray-200 hover:border-gray-300"
