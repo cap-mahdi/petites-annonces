@@ -39,8 +39,8 @@ export const CreateAdPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
-      <div className="container mx-auto px-4 max-w-3xl">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12">
+      <div className="container mx-auto px-6 max-w-4xl">
         <div className="mb-8">
           <MyAppButton
             variant="link"
@@ -57,10 +57,10 @@ export const CreateAdPage: React.FC = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           {/* Basic Info */}
-          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+          <div className="bg-white rounded-2xl shadow-xl p-10 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-gray-100 pb-4 mb-6">
               Informations générales
             </h2>
 
@@ -91,8 +91,8 @@ export const CreateAdPage: React.FC = () => {
           </div>
 
           {/* Address */}
-          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+          <div className="bg-white rounded-2xl shadow-xl p-10 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-gray-100 pb-4 mb-6">
               Adresse
             </h2>
 
@@ -103,7 +103,7 @@ export const CreateAdPage: React.FC = () => {
               placeholder="123 Rue de la Paix"
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <MyAppFormInput
                 name="address.locationDetails.city"
                 control={control}
@@ -118,7 +118,7 @@ export const CreateAdPage: React.FC = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <MyAppFormInput
                 name="address.locationDetails.postalCode"
                 control={control}
@@ -133,7 +133,7 @@ export const CreateAdPage: React.FC = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <MyAppFormInput
                 name="address.coordinates.latitude"
                 control={control}
@@ -154,12 +154,12 @@ export const CreateAdPage: React.FC = () => {
           </div>
 
           {/* Amenities */}
-          <div className="bg-white rounded-xl shadow-lg p-8 space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800 border-b pb-3">
+          <div className="bg-white rounded-2xl shadow-xl p-10 space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-gray-100 pb-4 mb-6">
               Équipements
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <MyAppFormInput
                 name="amenities.rooms"
                 control={control}
@@ -201,12 +201,13 @@ export const CreateAdPage: React.FC = () => {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-4 justify-end">
+          <div className="flex flex-col sm:flex-row gap-4 justify-end pt-4">
             <MyAppButton
               type="button"
               label="Annuler"
               variant="secondary"
               onClick={() => navigate("/")}
+              className="w-full sm:w-auto"
             />
             <MyAppButton
               type="submit"
@@ -214,7 +215,7 @@ export const CreateAdPage: React.FC = () => {
                 createAdMutation.isPending ? "Création..." : "Créer l'annonce"
               }
               disabled={createAdMutation.isPending}
-              className="min-w-[150px]"
+              className="w-full sm:w-auto min-w-[180px]"
             />
           </div>
         </form>

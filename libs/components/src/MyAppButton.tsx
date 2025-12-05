@@ -20,16 +20,16 @@ export const MyAppButton: React.FC<ButtonProps> = ({
   children,
 }) => {
   const baseStyles =
-    "px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md disabled:active:scale-100";
+    "px-8 py-3 rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg disabled:active:scale-100";
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 cursor-pointer",
+      "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 cursor-pointer hover:scale-105",
     secondary:
-      "bg-gradient-to-r from-gray-500 to-gray-600 text-white hover:from-gray-600 hover:to-gray-700 cursor-pointer",
+      "bg-gradient-to-r from-gray-600 to-gray-700 text-white hover:from-gray-700 hover:to-gray-800 cursor-pointer hover:scale-105",
     danger:
-      "bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 cursor-pointer",
-    link: "bg-transparent shadow-none hover:shadow-none px-0 py-0",
+      "bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 cursor-pointer hover:scale-105",
+    link: "bg-transparent shadow-none hover:shadow-none px-0 py-0 hover:scale-100",
   };
 
   return (

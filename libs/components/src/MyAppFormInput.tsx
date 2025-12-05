@@ -46,7 +46,7 @@ export function MyAppFormInput<T extends FieldValues>({
 
         return (
           <div className={className}>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-800 mb-3">
               {label}
             </label>
             {isTextarea ? (
@@ -56,10 +56,10 @@ export function MyAppFormInput<T extends FieldValues>({
                 onChange={handleChange}
                 rows={rows}
                 placeholder={placeholder}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md cursor-text resize-none ${
+                className={`h-auto w-full px-5 py-5 border-2 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-300 cursor-text resize-none bg-gray-50 hover:bg-white text-gray-900 placeholder-gray-400 ${
                   error
-                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300"
+                    ? "border-red-400 focus:ring-red-100 focus:border-red-500 bg-red-50"
+                    : "border-gray-200 hover:border-gray-300"
                 }`}
               />
             ) : (
@@ -71,10 +71,10 @@ export function MyAppFormInput<T extends FieldValues>({
                 placeholder={placeholder}
                 step={step}
                 min={min}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md cursor-text ${
+                className={` w-full px-5 py-5 border-2 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-300 cursor-text bg-red-600 hover:bg-white text-gray-50 placeholder-gray-400  ${
                   error
-                    ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                    : "border-gray-300"
+                    ? "border-red-400 focus:ring-red-100 focus:border-red-500 bg-red-50"
+                    : "border-gray-200 hover:border-gray-300"
                 }`}
               />
             )}
