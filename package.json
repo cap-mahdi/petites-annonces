@@ -55,12 +55,15 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.90.12",
+    "@types/leaflet": "^1.9.21",
     "axios": "^1.6.0",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
+    "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.68.0",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "6.29.0",
     "zod": "^4.1.13",
     "zustand": "^5.0.9"

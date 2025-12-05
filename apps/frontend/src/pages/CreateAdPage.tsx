@@ -6,6 +6,7 @@ import {
   MyAppButton,
   MyAppFormInput,
   MyAppFormCheckbox,
+  MyAppMapPicker,
 } from "@my-app/components";
 import { createInternalAdSchema } from "@my-app/schema";
 import type { CreateInternalAdDto } from "@my-app/types";
@@ -133,24 +134,12 @@ export const CreateAdPage: React.FC = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <MyAppFormInput
-                name="address.coordinates.latitude"
-                control={control}
-                label="Latitude"
-                type="number"
-                step="any"
-                placeholder="48.8566"
-              />
-              <MyAppFormInput
-                name="address.coordinates.longitude"
-                control={control}
-                label="Longitude"
-                type="number"
-                step="any"
-                placeholder="2.3522"
-              />
-            </div>
+            <MyAppMapPicker
+              latitudeName="address.coordinates.latitude"
+              longitudeName="address.coordinates.longitude"
+              control={control}
+              label="Emplacement (cliquez sur la carte pour sélectionner)"
+            />
           </div>
 
           {/* Amenities */}
