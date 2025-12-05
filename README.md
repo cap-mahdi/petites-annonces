@@ -27,7 +27,7 @@ L'interface web démarre sur `http://localhost:4200`
 ```
 myApp/
 ├── apps/
-│   ├── backend/          # API Express + TypeORM
+│   ├── backend/          # API Express + stockage en mémoire
 │   └── frontend/         # React + Vite
 └── libs/
     ├── types/            # Types TypeScript partagés
@@ -39,7 +39,7 @@ myApp/
 ### Stack Technique
 **Backend:**
 - Express.js (serveur API REST)
-- TypeORM + SQLite (persistance)
+- Stockage en mémoire (tableau JavaScript)
 - Zod (validation des données)
 - Morgan (logs HTTP)
 - Helmet (sécurité headers)
@@ -97,6 +97,7 @@ myApp/
 - [ ] **Pagination** : Limite de 20 annonces par page côté API
 
 ### Moyen terme
+- [ ] **Persistance réelle** : Migrer vers PostgreSQL/MongoDB pour stockage permanent
 - [ ] **Recherche avancée** : Filtres par catégorie, prix, localisation
 - [ ] **Geocoding** : Convertir adresses → coordonnées (API Nominatim)
 - [ ] **Notifications** : WebSockets pour alertes en temps réel
@@ -135,7 +136,7 @@ npx nx format:write
 - **Helmet** : Protection contre XSS, clickjacking, MIME sniffing
 - **CORS** : Configuration stricte des origines autorisées
 - **Validation** : Toutes les entrées utilisateur sont validées avec Zod
-- **TypeORM** : Requêtes paramétrées pour prévenir les injections SQL
+- **Stockage en mémoire** : Données persistées uniquement durant l'exécution du serveur
 
 ---
 
