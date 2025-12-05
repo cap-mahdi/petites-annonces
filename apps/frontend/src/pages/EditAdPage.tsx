@@ -45,8 +45,9 @@ export const EditAdPage: React.FC = () => {
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="mb-8">
           <MyAppButton
+            variant="link"
             onClick={() => navigate("/")}
-            className="text-gray-600 hover:text-gray-900 mb-4 flex items-center gap-2 cursor-pointer transition-colors duration-200 font-semibold"
+            className="text-gray-600 hover:text-gray-800 mb-4 flex items-center gap-2 cursor-pointer"
           >
             ← Retour
           </MyAppButton>

@@ -4,11 +4,17 @@ import { amenitiesSchema } from "./amenities.schema";
 
 export const internalAdSchema = z.object({
   id: z.string().uuid(),
-  title: z.string().min(3, "Le titre doit contenir au moins 3 caractères"),
+  title: z
+    .string({ message: "Le titre est requis" })
+    .min(3, { message: "Le titre doit contenir au moins 3 caractères" }),
   description: z
-    .string()
-    .min(10, "La description doit contenir au moins 10 caractères"),
-  price: z.number().positive("Le prix doit être positif"),
+    .string({ message: "La description est requise" })
+    .min(10, {
+      message: "La description doit contenir au moins 10 caractères",
+    }),
+  price: z
+    .number({ message: "Le prix doit être un nombre" })
+    .positive({ message: "Le prix doit être positif" }),
   address: addressSchema,
   amenities: amenitiesSchema,
   createdAt: z.string().datetime(),
