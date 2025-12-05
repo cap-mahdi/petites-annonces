@@ -7,7 +7,11 @@ interface AdCardProps {
   onDelete?: (id: string) => void;
 }
 
-export const MyAppAdCard: React.FC<AdCardProps> = ({ ad, onEdit, onDelete }) => {
+export const MyAppAdCard: React.FC<AdCardProps> = ({
+  ad,
+  onEdit,
+  onDelete,
+}) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
       <h3 className="text-xl font-bold mb-2">{ad.title}</h3>

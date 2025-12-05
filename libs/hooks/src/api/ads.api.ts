@@ -5,7 +5,7 @@ import type {
   ApiResponse,
 } from "@my-app/types";
 
-const API_URL = "http://localhost:3333/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3333/api";
 
 export const adsApi = {
   // Get all ads

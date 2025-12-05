@@ -3,9 +3,14 @@
  * This is only a minimal backend to get started.
  */
 
+import "dotenv/config";
 import express from "express";
 import * as path from "path";
 import internalAdRoutes from "./routes/internal-ad.routes";
+import { validateEnv } from "./config/env.config";
+
+// Validate environment variables
+const env = validateEnv();
 
 const app = express();
 
@@ -14,9 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 
-// CORS for development
+// CORS configuration
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", env.FRONTEND_URL);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   if (req.method === "OPTIONS") {
@@ -48,8 +53,8 @@ app.use(
   }
 );
 
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`API démarrée sur http://localhost:${port}/api`);
+const server = app.listen(env.PORT, () => {
+  console.log(`✅ API démarrée sur http://localhost:${env.PORT}/api`);
+  console.log(`🌐 CORS configuré pour: ${env.FRONTEND_URL}`);
 });
 server.on("error", console.error);

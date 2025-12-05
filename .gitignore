@@ -4,11 +4,15 @@
 dist
 tmp
 out-tsc
+build
 *.js.map
 *.d.ts.map
 
 # dependencies
 node_modules
+
+# Build outputs
+*.tsbuildinfo
 
 # IDEs and editors
 /.idea
@@ -48,6 +52,12 @@ Thumbs.db
 
 # Vite
 vite.config.*.timestamp*
+
+# Package manager
+.pnpm-debug.log
+.yarn-integrity
+yarn.lock
+pnpm-lock.yaml
 
 # Environment variables
 .env
