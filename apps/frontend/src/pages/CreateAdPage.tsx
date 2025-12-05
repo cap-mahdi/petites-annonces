@@ -21,7 +21,7 @@ export const CreateAdPage: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateInternalAdDto>({
-    resolver: zodResolver(createInternalAdSchema),
+    resolver: zodResolver(createInternalAdSchema) as any,
     defaultValues: {
       amenities: {
         garage: false,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import "leaflet/dist/leaflet.css";
@@ -18,7 +18,8 @@ L.Icon.Default.mergeOptions({
 interface MapPickerProps<T extends FieldValues> {
   latitudeName: FieldPath<T>;
   longitudeName: FieldPath<T>;
-  control: Control<T>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>;
   label?: string;
   defaultCenter?: [number, number];
   className?: string;
@@ -63,9 +64,7 @@ export function MyAppMapPicker<T extends FieldValues>({
           <Controller
             name={longitudeName}
             control={control}
-            render={({
-              field: { onChange: onLonChange, value: lonValue },
-            }) => {
+            render={({ field: { onChange: onLonChange, value: lonValue } }) => {
               useEffect(() => {
                 if (latValue && lonValue) {
                   setMapPosition([Number(latValue), Number(lonValue)]);

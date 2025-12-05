@@ -2,7 +2,8 @@ import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 interface FormCheckboxProps<T extends FieldValues> {
   name: FieldPath<T>;
-  control: Control<T>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>;
   label: string;
 }
 

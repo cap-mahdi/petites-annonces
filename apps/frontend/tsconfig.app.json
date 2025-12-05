@@ -4,6 +4,9 @@
     "outDir": "dist",
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "jsx": "react-jsx",
+    "composite": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": false,
     "lib": [
       "dom"
     ],

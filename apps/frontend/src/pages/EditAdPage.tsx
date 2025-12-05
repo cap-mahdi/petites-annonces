@@ -19,7 +19,7 @@ export const EditAdPage: React.FC = () => {
   const updateAdMutation = useUpdateAd();
 
   const { control, handleSubmit, reset } = useForm<UpdateInternalAdDto>({
-    resolver: zodResolver(updateInternalAdSchema),
+    resolver: zodResolver(updateInternalAdSchema) as any,
   });
 
   useEffect(() => {
