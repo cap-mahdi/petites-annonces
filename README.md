@@ -1,5 +1,9 @@
 # MyApp - Petites Annonces
 
+> Application fullstack de gestion de petites annonces internes développée dans le cadre d'un test technique. Permet de créer, consulter, modifier et supprimer des annonces avec sélection de localisation via carte interactive.
+
+---
+
 ## 🚀 Comment lancer le projet
 
 ### Installation des dépendances
