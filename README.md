@@ -1,108 +1,142 @@
-# MyApp
+# MyApp - Petites Annonces
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## 🚀 Comment lancer le projet
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
-
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/npm-workspaces-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-## Run tasks
-
-To run tasks with Nx use:
-
-```sh
-npx nx <target> <project-name>
+### Installation des dépendances
+```bash
+npm install
 ```
 
-For example:
+### Lancer le backend (API)
+```bash
+npx nx serve backend
+```
+Le serveur API démarre sur `http://localhost:3000`
 
-```sh
-npx nx build myproject
+### Lancer le frontend (Interface)
+```bash
+npx nx serve frontend
+```
+L'interface web démarre sur `http://localhost:4200`
+
+---
+
+## 🏗️ Architecture choisie
+
+### Structure Monorepo (Nx)
+```
+myApp/
+├── apps/
+│   ├── backend/          # API Express + TypeORM
+│   └── frontend/         # React + Vite
+└── libs/
+    ├── types/            # Types TypeScript partagés
+    ├── schema/           # Schémas Zod (validation)
+    ├── components/       # Composants React réutilisables
+    └── hooks/            # Hooks React personnalisés
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Stack Technique
+**Backend:**
+- Express.js (serveur API REST)
+- TypeORM + SQLite (persistance)
+- Zod (validation des données)
+- Morgan (logs HTTP)
+- Helmet (sécurité headers)
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**Frontend:**
+- React 19 + TypeScript
+- Tailwind CSS v4 (styling moderne)
+- React Hook Form + Zod (formulaires)
+- Leaflet (sélecteur de carte interactive)
+- Vite (dev server rapide)
 
-## Versioning and releasing
+**Libs partagées:**
+- `@myApp/types` : Interfaces communes backend/frontend
+- `@myApp/schema` : Validation Zod avec messages français
+- `@myApp/components` : Composants UI réutilisables
+- `@myApp/hooks` : Logique métier côté client
 
-To version and release the library use
+---
 
+## 💡 Pourquoi cette architecture ?
+
+### 1. **Monorepo Nx**
+- **Partage de code** : Types et schémas Zod partagés entre backend/frontend → cohérence garantie
+- **Évolutivité** : Facile d'ajouter de nouveaux modules (apps/libs) sans dupliquer le code
+- **Gestion des dépendances** : Un seul `package.json` à la racine simplifie les mises à jour
+
+### 2. **TypeScript End-to-End**
+- **Sécurité** : Erreurs détectées avant l'exécution
+- **Maintenance** : Refactoring facilité avec IDE (auto-completion, navigation)
+- **Documentation** : Les types servent de documentation vivante
+
+### 3. **Zod pour la validation**
+- **Source unique de vérité** : Les schémas Zod génèrent automatiquement les types TypeScript
+- **Messages personnalisés** : Validation côté serveur ET client avec messages en français
+- **React Hook Form** : Intégration native avec `zodResolver`
+
+### 4. **Tailwind CSS v4**
+- **Productivité** : Classes utilitaires → pas besoin d'écrire de CSS custom
+- **Cohérence** : Design system intégré (espacements, couleurs, bordures)
+- **Performance** : Génère uniquement les classes utilisées
+
+### 5. **Leaflet au lieu d'inputs manuels**
+- **UX améliorée** : Cliquer sur la carte est plus intuitif que taper des coordonnées
+- **Prévention d'erreurs** : Impossible de saisir des coordonnées invalides
+- **Visualisation** : L'utilisateur voit directement la localisation
+
+---
+
+## 🔮 Améliorations futures (si plus de temps)
+
+### Court terme
+- [ ] **Tests automatisés** : Jest/Vitest pour backend + frontend
+- [ ] **Upload d'images** : Multer + stockage cloud (S3/Cloudinary)
+- [ ] **Authentification** : JWT + session utilisateur
+- [ ] **Pagination** : Limite de 20 annonces par page côté API
+
+### Moyen terme
+- [ ] **Recherche avancée** : Filtres par catégorie, prix, localisation
+- [ ] **Geocoding** : Convertir adresses → coordonnées (API Nominatim)
+- [ ] **Notifications** : WebSockets pour alertes en temps réel
+- [ ] **CI/CD** : GitHub Actions pour déploiement automatique
+
+### Long terme
+- [ ] **Microservices** : Séparer auth, annonces, paiements en services indépendants
+- [ ] **GraphQL** : Remplacer REST par Apollo pour requêtes flexibles
+- [ ] **Internationalisation** : Support multi-langues (i18next)
+- [ ] **Progressive Web App** : Mode hors ligne + installation mobile
+
+---
+
+## 📦 Commandes utiles
+
+```bash
+# Construire tous les projets
+npx nx run-many -t build
+
+# Lancer les tests (si configurés)
+npx nx test backend
+npx nx test frontend
+
+# Générer un graphe de dépendances
+npx nx graph
+
+# Linter + formatter
+npx nx lint backend
+npx nx format:write
 ```
-npx nx release
-```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+---
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🔒 Sécurité
 
-## Add new projects
+- **Helmet** : Protection contre XSS, clickjacking, MIME sniffing
+- **CORS** : Configuration stricte des origines autorisées
+- **Validation** : Toutes les entrées utilisateur sont validées avec Zod
+- **TypeORM** : Requêtes paramétrées pour prévenir les injections SQL
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+---
 
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
-```
-
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
-
-```sh
-# Generate an app
-npx nx g @nx/react:app demo
-
-# Generate a library
-npx nx g @nx/react:lib some-lib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/npm-workspaces-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+**Développé avec Nx + React + Express + TypeScript 🚀**
