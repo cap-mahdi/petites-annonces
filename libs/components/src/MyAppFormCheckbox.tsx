@@ -6,7 +6,7 @@ interface FormCheckboxProps<T extends FieldValues> {
   label: string;
 }
 
-export function FormCheckbox<T extends FieldValues>({
+export function MyAppFormCheckbox<T extends FieldValues>({
   name,
   control,
   label,

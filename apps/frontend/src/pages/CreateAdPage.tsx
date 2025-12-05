@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useCreateAd } from "@my-app/hooks";
-import { Button, FormInput, FormCheckbox } from "@my-app/components";
+import { MyAppButton, MyAppFormInput, MyAppFormCheckbox } from "@my-app/components";
 import { createInternalAdSchema } from "@my-app/schema";
 import type { CreateInternalAdDto } from "@my-app/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,12 +38,12 @@ export const CreateAdPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="mb-8">
-          <button
+          <MyAppButton
             onClick={() => navigate("/")}
             className="text-gray-600 hover:text-gray-900 mb-4 flex items-center gap-2 cursor-pointer transition-colors duration-200 font-semibold"
           >
             ← Retour
-          </button>
+          </MyAppButton>
           <h1 className="text-4xl font-bold text-gray-800">
             Créer une annonce
           </h1>
@@ -59,14 +59,14 @@ export const CreateAdPage: React.FC = () => {
               Informations générales
             </h2>
 
-            <FormInput
+            <MyAppFormInput
               name="title"
               control={control}
               label="Titre"
               placeholder="Titre de l'annonce"
             />
 
-            <FormInput
+            <MyAppFormInput
               name="description"
               control={control}
               label="Description"
@@ -75,7 +75,7 @@ export const CreateAdPage: React.FC = () => {
               placeholder="Description détaillée de votre annonce"
             />
 
-            <FormInput
+            <MyAppFormInput
               name="price"
               control={control}
               label="Prix (€)"
@@ -91,7 +91,7 @@ export const CreateAdPage: React.FC = () => {
               Adresse
             </h2>
 
-            <FormInput
+            <MyAppFormInput
               name="address.locationDetails.street"
               control={control}
               label="Rue"
@@ -99,13 +99,13 @@ export const CreateAdPage: React.FC = () => {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormInput
+              <MyAppFormInput
                 name="address.locationDetails.city"
                 control={control}
                 label="Ville"
                 placeholder="Paris"
               />
-              <FormInput
+              <MyAppFormInput
                 name="address.locationDetails.district"
                 control={control}
                 label="Quartier"
@@ -114,13 +114,13 @@ export const CreateAdPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormInput
+              <MyAppFormInput
                 name="address.locationDetails.postalCode"
                 control={control}
                 label="Code postal"
                 placeholder="75000"
               />
-              <FormInput
+              <MyAppFormInput
                 name="address.locationDetails.country"
                 control={control}
                 label="Pays"
@@ -129,7 +129,7 @@ export const CreateAdPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormInput
+              <MyAppFormInput
                 name="address.coordinates.latitude"
                 control={control}
                 label="Latitude"
@@ -137,7 +137,7 @@ export const CreateAdPage: React.FC = () => {
                 step="any"
                 placeholder="48.8566"
               />
-              <FormInput
+              <MyAppFormInput
                 name="address.coordinates.longitude"
                 control={control}
                 label="Longitude"
@@ -155,7 +155,7 @@ export const CreateAdPage: React.FC = () => {
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <FormInput
+              <MyAppFormInput
                 name="amenities.rooms"
                 control={control}
                 label="Pièces"
@@ -163,7 +163,7 @@ export const CreateAdPage: React.FC = () => {
                 min="1"
                 placeholder="3"
               />
-              <FormInput
+              <MyAppFormInput
                 name="amenities.bathrooms"
                 control={control}
                 label="Salles de bain"
@@ -171,7 +171,7 @@ export const CreateAdPage: React.FC = () => {
                 min="0"
                 placeholder="1"
               />
-              <FormInput
+              <MyAppFormInput
                 name="amenities.toilets"
                 control={control}
                 label="Toilettes"
@@ -182,12 +182,12 @@ export const CreateAdPage: React.FC = () => {
             </div>
 
             <div className="flex gap-8 pt-2">
-              <FormCheckbox
+              <MyAppFormCheckbox
                 name="amenities.garage"
                 control={control}
                 label="Garage"
               />
-              <FormCheckbox
+              <MyAppFormCheckbox
                 name="amenities.balcony"
                 control={control}
                 label="Balcon"
@@ -197,13 +197,13 @@ export const CreateAdPage: React.FC = () => {
 
           {/* Actions */}
           <div className="flex gap-4 justify-end">
-            <Button
+            <MyAppButton
               type="button"
               label="Annuler"
               variant="secondary"
               onClick={() => navigate("/")}
             />
-            <Button
+            <MyAppButton
               type="submit"
               label={
                 createAdMutation.isPending ? "Création..." : "Créer l'annonce"

@@ -9,7 +9,7 @@ interface ButtonProps {
   className?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const MyAppButton: React.FC<ButtonProps> = ({
   label,
   onClick,
   type = "button",

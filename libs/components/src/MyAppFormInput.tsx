@@ -12,7 +12,7 @@ interface FormInputProps<T extends FieldValues> {
   className?: string;
 }
 
-export function FormInput<T extends FieldValues>({
+export function MyAppFormInput<T extends FieldValues>({
   name,
   control,
   label,

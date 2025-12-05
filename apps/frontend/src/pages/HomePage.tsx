@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetAds, useDeleteAd } from "@my-app/hooks";
-import { AdCard, Button } from "@my-app/components";
+import { MyAppAdCard, MyAppButton } from "@my-app/components";
 import { useAdStore } from "../store/ad.store";
 import { useNavigate } from "react-router-dom";
 
@@ -71,7 +71,7 @@ export const HomePage: React.FC = () => {
               disponible{ads && ads.length > 1 ? "s" : ""}
             </p>
           </div>
-          <Button
+          <MyAppButton
             label="+ Créer une annonce"
             onClick={handleCreateNew}
             className="shadow-lg hover:shadow-xl"
@@ -88,7 +88,7 @@ export const HomePage: React.FC = () => {
               <p className="text-gray-600 mb-6">
                 Commencez par créer votre première annonce
               </p>
-              <Button
+              <MyAppButton
                 label="Créer la première annonce"
                 onClick={handleCreateNew}
               />
@@ -97,7 +97,7 @@ export const HomePage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {ads?.map((ad) => (
-              <AdCard
+              <MyAppAdCard
                 key={ad.id}
                 ad={ad}
                 onEdit={handleEdit}
