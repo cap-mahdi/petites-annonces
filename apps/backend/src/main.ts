@@ -5,6 +5,8 @@
 
 import "dotenv/config";
 import express from "express";
+import morgan from "morgan";
+import helmet from "helmet";
 import * as path from "path";
 import internalAdRoutes from "./routes/internal-ad.routes";
 import { validateEnv } from "./config/env.config";
@@ -13,6 +15,10 @@ import { validateEnv } from "./config/env.config";
 const env = validateEnv();
 
 const app = express();
+
+// Security & Logging Middleware
+app.use(helmet()); // Security headers
+app.use(morgan("dev")); // HTTP request logger
 
 // Middleware
 app.use(express.json());
